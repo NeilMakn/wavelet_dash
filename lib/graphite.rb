@@ -18,7 +18,6 @@ class Graphite
   # Graphite and parse it
   def query(name, since=nil)
     since ||= '-30min'
-    @url.path += '/render'
     @url.query = URI.encode_www_form(:format => 'json',
                                      :target => name,
                                      :from   => since)
