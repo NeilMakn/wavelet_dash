@@ -6,7 +6,7 @@ SCHEDULER.every '10s', :first_in => 0 do
   # Create an instance of our helper class
   q = Graphite.new DataServerConf::GRAPHITE
   
-  graphite_test_target = 'graphite.com.crowdcompass.vagrant.graphite.load.shortterm'
+  graphite_test_target = 'graphite.com.crowdcompass.vagrant.graphite.load.medterm'
   
   # get the current value
   # current = q.value(graphite_test_target, '-1min')
