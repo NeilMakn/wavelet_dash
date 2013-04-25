@@ -87,8 +87,8 @@ module Wavelets
     steps.times do
       slices = data_array.each_slice(2).to_a
       averages = slices.map { |slice| average(slice) }
-      differences = slices.zip(averages).map do |slice, average|
-        slice[0] - average
+      differences = slices.zip(averages).map do |slice, mean|
+        slice[0] - mean
       end
       discrete_haar.push(differences)
       data_array = averages
@@ -102,6 +102,30 @@ module Wavelets
     if steps.nil? or steps > max_steps
       steps = max_steps
     end
-   
+    
+    data_xmin = graph_data.first[:x]
+    data_xmax = graph_data.last[:x]
+    discrete_haar = [graph_data]
+
+    steps.times do |step|
+      slices = graph_data.each_slice(2).to_a
+      averages = slices.map.with_index do |slice, i|
+        { :x => ((Float(data_xmax) / (data_xmax / (2 + 2 * step)) * i) + data_xmin),
+          :y => average([slice.first[:y], slice.last[:y]]) }
+      end
+      differences = slices.zip(averages).map do |slice, mean|
+        { :x => mean[:x],
+          :y => slice.first[:y] - mean[:y] }
+      end
+      discrete_haar.push(differences)
+      graph_data = averages
+    end
+  
+    if discrete_haar.last.length == 1
+      discrete_haar.last.push({:x => data_xmax, :y => discrete_haar.last.first[:y]})
+    end
+    return discrete_haar
   end
+  
+  # end of module
 end

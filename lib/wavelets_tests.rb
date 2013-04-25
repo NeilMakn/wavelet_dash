@@ -19,10 +19,10 @@ describe "Wavelets tests" do
            {:x => 4, :y => 3}, {:x => 5, :y => -5}, 
            {:x => 6, :y => 4}, {:x => 7, :y => 2}]
   wave_graph = [graph,
-                [{:x => 0, :y => 3}, {:x => 2, :y => 0},
-                 {:x => 4, :y => 4}, {:x => 6, :y => 1}],
-                [{:x => 0, :y => -1},{:x => 4, :y => -2}],
-                [{:x => 0, :y => 4}]]
+                [{:x=>0.0, :y=>3.0}, {:x=>2.3333333333333335, :y=>0.0},
+                 {:x=>4.666666666666667, :y=>4.0}, {:x=>7.0, :y=>1.0}],
+                [{:x=>0.0, :y=>-1.0}, {:x=>7.0, :y=>-2.0}],
+                [{:x=>0.0, :y=>2.0}, {:x=>7, :y=>2.0}]]
   
   it "should turn the seq #{haar} into seq #{raah}" do
     Wavelets.haar(haar).must_equal raah
@@ -42,7 +42,7 @@ describe "Wavelets tests" do
   end
 
   it "should generate a graph list of haar wavelets" do
-    Wavelets.discrete_haar_graph(graph).must_equal wave_graph
+    Wavelets.discrete_graph(graph).must_equal wave_graph
   end
 end
 
