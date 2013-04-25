@@ -105,12 +105,13 @@ module Wavelets
     
     data_xmin = graph_data.first[:x]
     data_xmax = graph_data.last[:x]
+    data_rmax = data_xmax - data_xmin
     discrete_haar = [graph_data]
 
     steps.times do |step|
       slices = graph_data.each_slice(2).to_a
       averages = slices.map.with_index do |slice, i|
-        { :x => ((Float(data_xmax) / (data_xmax / (2 + 2 * step)) * i) + data_xmin),
+        { :x => ((Float(data_rmax) / (data_rmax / (2 + 2 * step)) * i) + data_xmin),
           :y => average([slice.first[:y], slice.last[:y]]) }
       end
       differences = slices.zip(averages).map do |slice, mean|
