@@ -116,7 +116,7 @@ module Wavelets
       end
       differences = slices.zip(averages).map do |slice, mean|
         { :x => mean[:x],
-          :y => slice.first[:y] - mean[:y] }
+          :y => (slice.first[:y] - mean[:y]).abs }
       end
       discrete_haar.push(differences)
       graph_data = averages
