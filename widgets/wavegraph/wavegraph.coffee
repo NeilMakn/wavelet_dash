@@ -7,7 +7,18 @@ class Dashing.Wavegraph extends Dashing.Widget
       points[points.length - 1].y
 
   ready: ->
+    palette = new Rickshaw.Color.Palette({ scheme: 'colorwheel' })
     container = $(@node).parent()
+
+    myPoints = @get('series') if @get('series')
+    testSeries = []
+    for element, index in myPoints
+      temp = {
+        data: element,
+        color: palette.color()
+      }
+      testSeries[index] = temp
+
     # Gross hacks. Let's fix this.
     width = (Dashing.widget_base_dimensions[0] * container.data("sizex")) + Dashing.widget_margins[0] * 2 * (container.data("sizex") - 1)
     height = (Dashing.widget_base_dimensions[1] * container.data("sizey"))
@@ -15,15 +26,10 @@ class Dashing.Wavegraph extends Dashing.Widget
       element: @node
       width: width
       height: height
-      series: [
-        {
-        color: "#fff",
-        data: [{x:0, y:0}]
-        }
-      ]
+      min: 'auto'
+      renderer: 'line'
+      series: testSeries
     )
-
-    @graph.series[0].data = @get('points') if @get('points')
 
     x_axis = new Rickshaw.Graph.Axis.Time(graph: @graph)
     y_axis = new Rickshaw.Graph.Axis.Y(graph: @graph, tickFormat: Rickshaw.Fixtures.Number.formatKMBT)
@@ -31,5 +37,6 @@ class Dashing.Wavegraph extends Dashing.Widget
 
   onData: (data) ->
     if @graph
-      @graph.series[0].data = data.points
+      for element, index in @graph.series
+        @graph.series[index].data = data.series[index]
       @graph.render()
