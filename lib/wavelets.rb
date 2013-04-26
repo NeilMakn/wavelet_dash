@@ -121,10 +121,16 @@ module Wavelets
       discrete_haar.push(differences)
       graph_data = averages
     end
-  
-    discrete_haar.last.push({ :x => data_xmax,
-                              :y => discrete_haar.last.first[:y]})
 
+    # If the discrete wavelet graph goes through all the steps, the
+    # last wavelet will have one less datapoint. This pushes an extra
+    # data point to the end with the same value as the last one. 
+    if steps == max_steps
+      discrete_haar.last.push({ :x => data_xmax,
+                                :y => discrete_haar.last.last[:y]})
+    end
+    # FIXME, perhaps this should be done in the dashing job that uses
+    # wavelets, rather than here.
     return discrete_haar
   end
   
