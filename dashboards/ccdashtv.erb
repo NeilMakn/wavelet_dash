@@ -1,3 +1,9 @@
+<script type='text/javascript'>
+$(function() {
+Dashing.gridsterLayout('[{"col":2,"row":1},{"col":1,"row":1},{"col":3,"row":1},{"col":4,"row":1},{"col":3,"row":2},{"col":1,"row":2}]')
+});
+</script>
+
 <div class="gridster">
   <ul>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
@@ -8,14 +14,14 @@
     </li>
     <li data-row="1" data-col="3" data-sizex="1" data-sizey="1">
       <div data-id="send_load" data-view="Threshold" data-title="Shorterm Load" data-operator="lesser" style="background-color: #4FD5D6"></div>
-    <li data-row="1" data-col="3" data-sizex="1" data-sizey="1">
+    <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">
       <div data-id="send_free" data-view="Threshold" data-title="Free Memory" data-operator="lesser" style="background-color: #4FD5D6"></div>
     <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
      <div data-id="urlcheck" data-view="Urllist" data-unordered="true" data-title="URLs"</div>
     </li>
     <li data-row="2" data-col="2" data-sizex="2" data-sizey="1">
       <div data-id="graphite_wave_test" data-view="Wavegraph"
-	   data-title="" style="background-color: white"></div>
+     data-title="" style="background-color: white"></div>
     </li>
   </ul>
 </div>
