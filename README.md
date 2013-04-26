@@ -13,3 +13,5 @@ end
 ```
 
 Your dashing jobs will be able to `require './lib/data_server_conf'` and refer to specific data servers with something like `DataServerConf::GRAPHITE`. Right now, the object returned by `DataServer.new` is a URI object and can be used as such right after. <http://ruby-doc.org/stdlib-1.9.2/libdoc/uri/rdoc/URI.html>
+
+
