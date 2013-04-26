@@ -19,5 +19,5 @@ SCHEDULER.every '1s', :first_in => 0 do
 
 
   # send to dashboard, so the number the meter and the graph widget can understand it
-  send_event 'query_test', { current: current_value, last: prev_value, threshold: threshold_set }
+  send_event 'send_query', { current: current_value, last: prev_value, threshold: threshold_set }
 end

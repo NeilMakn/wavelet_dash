@@ -6,17 +6,18 @@ SCHEDULER.every '1s', :first_in => 0 do
   # Create an instance of our helper class
   q = Graphite.new DataServerConf::GRAPHITE
 
-  graphite_test_target = "graphite.com.crowdcompass.vagrant.graphite.cpu.0.idle"
+  graphite_test_target = "graphite.com.crowdcompass.vagrant.graphite.memory.free"
 
   # get the current value
-  current_value = q.value graphite_test_target, "-2min"
+  current_value = q.value graphite_test_target, "-5min"
   # find set of data preceding current  value
-  data_set = q.points graphite_test_target, "-2min"
+  data_set = q.points graphite_test_target, "-5min"
   # find first value's y
   prev_value = data_set[0][:y]
   # set threshold
-  threshold_set = 50
+  threshold_set = 200
+
 
   # send to dashboard, so the number the meter and the graph widget can understand it
-  send_event 'send_idle', { current: current_value, last: prev_value, threshold: threshold_set }
+  send_event 'send_free', { current: current_value, last: prev_value, threshold: threshold_set }
 end
