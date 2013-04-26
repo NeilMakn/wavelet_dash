@@ -122,9 +122,9 @@ module Wavelets
       graph_data = averages
     end
   
-    if discrete_haar.last.length == 1
-      discrete_haar.last.push({:x => data_xmax, :y => discrete_haar.last.first[:y]})
-    end
+    discrete_haar.last.push({ :x => data_xmax,
+                              :y => discrete_haar.last.first[:y]})
+
     return discrete_haar
   end
   
