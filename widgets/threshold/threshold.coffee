@@ -31,7 +31,6 @@ class Dashing.Threshold extends Dashing.Widget
         c.replace /\bstatus-\S+/g, ''
       # add new class
       $(@get('node')).addClass "status-#{data.status}"
-    console.log (@get('operator'))
     if @get('operator') == 'greater' && data.current >= data.threshold
       $(@node).css('background-color', 'red')
     else if @get('operator') == 'lesser' && data.current <= data.threshold
